@@ -2,32 +2,109 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+@layer base {
+  @font-face {
+    font-family: 'yekan';
+    src: url('/fonts/yekan-regular.eot?#') format('eot'),
+        url('/fonts/yekan-regular.woff') format('woff'),
+        url('/fonts/yekan-regular.ttf') format('truetype');
+  }
+  @font-face {
+    font-family: 'yekan';
+    src:url('/fonts/Viga-Regular.ttf') format('truetype');
+   unicode-range: U+0030-0039, U+0041-007a;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+  /* Chrome, Safari, Edge, Opera */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Firefox */
+  input[type=number] {
+    -moz-appearance: textfield;
+  }
+  
+  body {
+    background-color: #EAEDF7;
+    height: 100vh;
+    font-family: 'yekan';
+  }
+
+  * {
+    font-family: 'yekan';
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+@layer components {
+  .h-main {
+    height: calc(100vh - 65px);
+    position: relative;
+  }
+
+  .w-container {
+    width: calc(100% - 40px);
+    max-width: 1100px;
+  }
+
+  .row {
+    @apply flex w-full gap-2 flex-wrap lg:flex-nowrap md:flex-nowrap
+  }
+  .column {
+      @apply flex flex-col gap-1 w-full 
+  }
+
+  .form-container {
+    @apply flex flex-wrap gap-8 w-full bg-white py-8 px-5 border-border-color border rounded-lg 
+  }
+
+  .title-input {
+    @apply text-primary text-base font-bold mb-1
+  }
+
+  .h-55 {
+    height: 55px;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  .shadow1 {
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2);
   }
+
+  .shadow2 {
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  .shadow3 {
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5);
+  }
+
+  .menu li a {
+    font-size: 16px;
+  }
+
+  .menu-aside li svg {
+    width: 20px;
+    color: #fff;
+  }
+
+  .menu-aside li a,
+  .menu-aside li summary {
+   border-radius: 0 50px 50px 0 !important;
+  }
+
+  .menu-aside li a.active {
+   background-color: #FA7B21 !important;
+   color: #fff !important;
+   padding: 8px !important;
+  }
+
+  .menu-aside li a.active span {
+    background-color: #083D77 !important;
+    color: #fff !important;
+    border-radius: 50% !important;
+    padding: 6px;
+   }
 }
+
