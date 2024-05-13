@@ -7,51 +7,55 @@ import {
   } from '@heroicons/react/24/outline'
 import List from './liist'
 
-const Menu = () => {
+const Menu = ({user}) => {
     const menus = [
         {
           title: "داشبورد",
           Icon:  <span><InboxIcon /></span>,
-          link: '/',
-          sub: null
+          link: '/dashboard',
+          sub: null,
+          roles: ['teacher', 'admin']
         },
         {
           title: "مدیریت مدیرگروه",
           Icon:  <span><ListBulletIcon /></span>,
           link: null,
+          roles: ['admin'],
           sub: [
             {
               title: "افزودن",
               Icon:  <span><UserPlusIcon /></span>,
-              link: '/'
+              link: '/dashboard/teacher/add'
             },
             {
               title: "لیست مدیرگروه",
               Icon:  <span><PencilSquareIcon /></span>,
-              link: '/'
+              link: '/dashboard/teacher'
             }
           ]
         },
         {
           title: "مدیریت نوبت ها",
           Icon:  <span><CalendarIcon /></span>,
-          link: '/',
+          link: '/dashboard/managementturn',
+          roles: ['teacher', 'admin'],
           sub: null
         },
         {
           title: "مدیریت مقطع و رشته",
           Icon: <span><ListBulletIcon /></span>,
           link: null,
+          roles: ['admin'],
           sub: [
             {
               title: "افزودن",
               Icon: <span><UserPlusIcon /></span>,
-              link: '/info/add'
+              link: '/dashboard/info/add'
             },
             {
               title: "لیست مقاطع و رشته ها",
               Icon: <span><PencilSquareIcon /></span>,
-              link: '/'
+              link: '/dashboard/info'
             }
           ]
         }
@@ -60,7 +64,7 @@ const Menu = () => {
     return(
         <ul className="menu menu-lg flex gap-2 p-0 pr-2 menu-aside">
             {
-                menus.map((menu, index) => <List key={index} data={menu} />)
+                menus.map((menu, index) => menu.roles.includes(user.role) && <List key={index} data={menu} />)
             }
         </ul>
     )

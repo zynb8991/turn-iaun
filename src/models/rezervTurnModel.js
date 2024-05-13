@@ -10,23 +10,16 @@ const rezervTurnSchema = mongoose.Schema({
     teacherId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
-        required: [true, 'Please fill the teacherId']
+        required: [true, 'Please fill the sectionId']
     },
-    hourTurn: {
-        type: Number,
-        required: [true, 'Please fill the hourTurn']
-    },
-    dayTurn: {
-        type: String,
-        required: [true, 'Please fill the dayTurn']
+    dateTurn: {
+        type: Date,
+        required: [true, 'Please fill the dateTurn']
     },
     status: {
         type: Number,
-        required: [true, 'Please fill the status']
-    },
-    date: {
-        type: Number,
-        required: [true, 'Please fill the date']
+        required: [true, 'Please fill the status'],
+        default: 0
     }
 
 },{

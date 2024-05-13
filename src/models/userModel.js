@@ -7,7 +7,7 @@ const userSchema = mongoose.Schema({
             validator: function(v) {
                 return /^[\u0600-\u06FF\s]+$/.test(v);
             },
-            message: props => "FuulName is not valid"
+            message: props => "FullName is not valid"
         },
         required: [true, 'Please fill the fullName']
     },
@@ -36,6 +36,10 @@ const userSchema = mongoose.Schema({
             return this.role === 'teacher';
         }
     },
+    sectionsId: [{
+        type: mongoose.Types.ObjectId,
+        ref: 'Section'
+    }],
     tempcode: Number,
     active: {
         type: Number,

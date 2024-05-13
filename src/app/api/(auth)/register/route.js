@@ -1,4 +1,3 @@
-
 import User from "@/models/userModel";
 import connectDB from "@/utils/db";
 import bcrypt from "bcryptjs";
@@ -32,7 +31,6 @@ export async function POST(req) {
         // Hash password
         const salt = await bcrypt.genSalt(10);
         const hashPass = await bcrypt.hash(password, salt);
-        console.log(hashPass);
 
         const user = await User.create({
             fullName,

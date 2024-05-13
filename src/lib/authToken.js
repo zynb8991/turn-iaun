@@ -1,4 +1,3 @@
-import React from 'react'
 import { cookies } from 'next/headers';
 
 const authToken = async () => {
@@ -11,12 +10,10 @@ const authToken = async () => {
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({token: token.value})
     });
-
     const data = await res.json();
     if(data.error) {
       return false;
     }
-    
     return data.data;
 
   } catch (error) {

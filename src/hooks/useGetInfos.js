@@ -9,7 +9,7 @@ const useGetInfos = () => {
     const getInfos = async () => {
         setLoading(true);
         try {
-            const res = await fetch("http://localhost:3000/api/infoes");
+            const res = await fetch("http://localhost:3000/api/infos?type=college");
 
             const data = await res.json();
             if(data.error) {

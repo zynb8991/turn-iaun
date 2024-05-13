@@ -9,52 +9,50 @@ export async function POST(req) {
         // Connect to mongodb database
         await connectDB();
 
-        const {userId, startHour, endHour, day, date, state, period} = await req.json();
+        const {userId, turns} = await req.json();
 
-        const userRezervTurn = await UserTurn.findOne({userId, startHour, endHour, day, date, state, period});
-        if(userRezervTurn) {
-            return Response.json({
-                data: null,
-                metaData: null,
-                ok: -1,
-                error: true,
-                message: "چنین اطلاعاتی وجود دارد."
-            },
-            {
-                status: 400
-            })
+        // برای این استاد با این روز نوبتی هست یانه اگه بود مقادیر رو اپدیت کن درغیر اینصورت اضافه کن
+        var turnId = [];
+        for (const turn of turns) {
+            let turnTeacher = await UserTurn.findOne({ userId: userId, day: turn.day });
+            if (turnTeacher) {
+                turnTeacher.startHour = turn.startHour;
+                turnTeacher.endHour = turn.endHour;
+                await turnTeacher.save();
+                turnId.push(turnTeacher._id);
+            } else {
+                const newTurnTeacher = await UserTurn.create({
+                    userId,
+                    day: turn.day,
+                    startHour: turn.startHour,
+                    endHour: turn.endHour
+                });
+                turnId.push(newTurnTeacher._id);
+            }
         }
-        const newUserRezervTurn = await UserTurn.create({
-            userId, 
-            startHour, 
-            endHour, 
-            day, 
-            date, 
-            state, 
-            period
-        })
 
-        if(newUserRezervTurn) {
+        // Delete documents from UserTurn collection
+        await UserTurn.deleteMany({
+            userId: userId,
+            _id: {
+                $nin: turnId
+            }
+        });
+
+        const newTurnTeacher = await UserTurn.find({userId: userId});
+        if(newTurnTeacher) {
             return Response.json({
-                data: newUserRezervTurn,
+                data: newTurnTeacher,
                 metaData: null,
                 ok: 1,
                 error: false,
-                message: "اضافه کردن با موفقیت انجام شد."
+                message: "عملیات با موفقیت انجام شد."
             },
             {
                 status: 201
             })
         }
-
-        return Response.json({
-            data: null,
-            metaData: null,
-            ok: -1,
-            error: true,
-            message: "هنگاه عملیات خطایی رخ داده است."
-        })
-
+     
     } catch (error) {
         return Response.json({
             data: null,

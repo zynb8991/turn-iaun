@@ -58,9 +58,11 @@ export async function POST(req) {
                 expiresIn: "1d"
             }),
             maxAge: (60 * 60 * 24),
-            httpOnly: true,
-            secure: true
+            httpOnly: false,
+            secure: false
         })
+
+
         return Response.json({
             data: user,
             metaData: null,

@@ -16,20 +16,8 @@ const userTurnSchema = mongoose.Schema({
         required: [true, 'Please fill the endHour']
     },
     day: {
-        type: String,
+        type: Number,
         required: [true, 'Please fill the day']
-    },
-    date: {
-        type: Number,
-        required: [true, 'Please fill the date']
-    },
-    state: {
-        type: Number,
-        required: [true, 'Please fill the state']
-    },
-    period: {
-        type: Number,
-        required: [true, 'Please fill the period']
     }
     
 },{

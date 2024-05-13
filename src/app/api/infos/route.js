@@ -9,7 +9,6 @@ export async function POST(req) {
     try {
         // Connect to mongodb database
         await connectDB();
-
         const {title, type, code, infoId} = await req.json();
 
         const success = exsistInfo({title, type, code});
@@ -44,7 +43,6 @@ export async function POST(req) {
         if(getInfo) {
             getInfo.infosId = [...getInfo.infosId, info._id];
             await Info.findByIdAndUpdate(infoId, getInfo);
-            console.log(getInfo.infosId);
         }
 
         if(info) {
@@ -83,17 +81,22 @@ export async function POST(req) {
 // @route   GET /api/infoes
 // @access  Private
 export async function GET(req) {
+    const url = new URL(req.url);
+    const typeQuery = url.searchParams.get("type");
+
+    const queries = typeQuery ? {type: "college"} : {}
+    
     try {
          // Connect to mongodb database
          await connectDB();
 
-         const infos = await Info.find({"type": "college"}).populate({
+         const infos = await Info.find(queries).populate('infoId').populate({
             path: 'infosId',
             model: 'Info',
             populate: {
                 path: 'infosId'
             }
-        });;
+        });
 
          return Response.json({
             data: infos,

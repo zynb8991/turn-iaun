@@ -36,6 +36,21 @@
   * {
     font-family: 'yekan';
   }
+
+    /* width */
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #cbcbcb;
+  }
 }
 
 @layer components {
@@ -80,6 +95,16 @@
     box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5);
   }
 
+  .stroke {
+    -webkit-text-fill-color: #fff;
+    -webkit-text-stroke: 2px #FA7B21;
+    letter-spacing: 6px;
+  }
+
+  .rtl {
+    direction: ltr;
+  }
+
   .menu li a {
     font-size: 16px;
   }
@@ -105,6 +130,47 @@
     color: #fff !important;
     border-radius: 50% !important;
     padding: 6px;
-   }
+  }
+
+  .table th {
+    @apply bg-primary text-base text-white rounded-lg text-center
+  }
+
+  .table td {
+    @apply text-base text-neutral-600 text-center border rounded-lg 
+  }
+
+  .table tr:nth-child(odd) {
+    @apply bg-neutral-100
+  }
+
+  .calendar-weeks > span {
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  .hasTurn {
+    background-color: rgba(255, 203, 151, 0.8);
+    color: #083D77;
+  }
+
+  .selected-day {
+    background-color: #083D77;
+    color: #fff;
+  }
+
+  .turn-hours-btns {
+    @apply flex items-center justify-center shrink-0 w-[95%] h-[40px] border-2 border-[#f97c2299] rounded-lg text-base font-bold text-secondary shadow-[0px_0px_2px_#f97c2288] bg-white transition
+  }
+
+  .selected-time {
+    border-color: #083D77;
+    color: #083D77;
+  }
 }
 

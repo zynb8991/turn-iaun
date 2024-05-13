@@ -4,7 +4,7 @@ import { useContext } from 'react'
 import Menu from './menu'
 import { LoginContext } from '@/context'
 
-const Aside = () => {
+const Aside = ({user}) => {
   const {open, handleOpen} = useContext(LoginContext);
 
   const handleCloseMenu = (e) => {
@@ -19,7 +19,7 @@ const Aside = () => {
           <span className='text-xs'>دانشگاه آزاد نجف آباد</span>
         </div>
         
-        <Menu />
+        <Menu user={user} />
       </div>
     </div>
 

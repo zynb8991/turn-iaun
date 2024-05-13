@@ -46,10 +46,6 @@ const validation = ({email, password}) => {
         toast.error("وارد کردن رمزعبور اجباری است! ");
         return false;
     }
-    // if(/^[a-zA-Z]+([\.]?[a-zA-Z0-9]+)*@[a-zA-Z]+([\.-]?[a-zA-Z0-9]+)*(\.[a-zA-Z]{2,3})+$/.test(email)) {
-    //     toast.error("لطفا ایمیل را صحیح وارد کنید!");
-    //     return false;
-    // }
 
     return true;
 }
